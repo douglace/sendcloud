@@ -1,0 +1,23 @@
+.sc-returns {
+    .title {
+        text-align: center;
+    }
+
+    .return-header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+
+        .add-return {
+            cursor: pointer;
+        }
+    }
+
+    table {
+        background-color: #fff;
+        thead tr th {
+            padding: 20px;
+        }
+    }
+}
+

@@ -1,0 +1,22 @@
+
+@font-face {
+    font-family: 'poppins-black';
+    src: url('./fonts/Poppins-Black.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.text-red {
+    color: red;
+}
+
+.user-icon {
+    background: url('./icons/user.png');
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.poppins-black {
+    font-family: 'poppins-black';
+}

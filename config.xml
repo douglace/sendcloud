@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>sendcloud</name>
+	<displayName><![CDATA[Gestion des retours]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
+	<description><![CDATA[Permet au marchand de gérer les retours clients]]></description>
+	<author><![CDATA[bewebcreation]]></author>
+	<tab><![CDATA[administration]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+</module>

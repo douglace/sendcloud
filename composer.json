@@ -1,0 +1,15 @@
+{
+    "name": "anthony/sendcloud",
+    "autoload": {
+        "psr-4": {
+            "Anthony\\Sendcloud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "vexi",
+            "email": "kvdouglace@gmail.com"
+        }
+    ],
+    "require": {}
+}

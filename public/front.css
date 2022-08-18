@@ -1,0 +1,22 @@
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./_dev/sass/front.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.sc-returns .title {
+  text-align: center;
+}
+.sc-returns .return-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+.sc-returns .return-header .add-return {
+  cursor: pointer;
+}
+.sc-returns table {
+  background-color: #fff;
+}
+.sc-returns table thead tr th {
+  padding: 20px;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnQuY3NzIiwibWFwcGluZ3MiOiI7OztBQUNJO0VBQ0k7QUFBUjtBQUdJO0VBQ0k7RUFDQTtFQUNBO0FBRFI7QUFHUTtFQUNJO0FBRFo7QUFLSTtFQUNJO0FBSFI7QUFJUTtFQUNJO0FBRlosQyIsInNvdXJjZXMiOlsid2VicGFjazovL3NlbmRjbG91ZC8uL19kZXYvc2Fzcy9mcm9udC5zY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIi5zYy1yZXR1cm5zIHtcbiAgICAudGl0bGUge1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgfVxuXG4gICAgLnJldHVybi1oZWFkZXIge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICAgICAgICBwYWRkaW5nOiAyMHB4O1xuXG4gICAgICAgIC5hZGQtcmV0dXJuIHtcbiAgICAgICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgfVxuICAgIH1cblxuICAgIHRhYmxlIHtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcbiAgICAgICAgdGhlYWQgdHIgdGgge1xuICAgICAgICAgICAgcGFkZGluZzogMjBweDtcbiAgICAgICAgfVxuICAgIH1cbn1cblxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9*/
