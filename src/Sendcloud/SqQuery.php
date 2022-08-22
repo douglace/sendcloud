@@ -27,8 +27,15 @@
 namespace Anthony\Sendcloud\Sendcloud;
 
 use Anthony\Sendcloud\Sendcloud\Interfaces\ScQueryInterface;
+use Configuration;
 
 abstract class SqQuery implements ScQueryInterface {
+
+    public function __construct()
+    {
+        $this->username = Configuration::get('SC_USERNAME');
+        $this->password = Configuration::get('SC_PASSWORD');
+    }
 
     /**
      * @var string

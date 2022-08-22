@@ -1,3 +1,5 @@
+@import 'popup';
+
 .sc-returns {
     .title {
         text-align: center;
@@ -19,5 +21,53 @@
             padding: 20px;
         }
     }
+}
+
+.wrap-add-orders {
+    background-color: #fff;
+    padding: 25px;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    min-width: 400px;
+    border-radius: 5px;
+    button {
+        border-radius: 0 10px 10px 0;
+    }
+    input {
+        width: 300px;
+    }
+    
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+#add-return {
+    .title {
+        text-align: center;
+    }
+    table {
+        background-color: #fff;
+        thead tr th {
+            padding: 20px;
+        }
+        .order-state {
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 5px;
+        }
+    }
+    form {
+        margin-top: 30px;
+        padding: 20px 0;
+        label.buy-fees {
+            display: flex;
+            gap: 10px;
+            padding: 20px 0;
+        }
+    }
+    
 }
 

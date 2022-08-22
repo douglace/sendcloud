@@ -24,6 +24,8 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
+use Anthony\Sendcloud\Models\CustomerReturn;
+use Anthony\Sendcloud\Mollie\Mollie;
 use Anthony\Sendcloud\Sendcloud\Classes\CancelReturn;
 use Anthony\Sendcloud\Sendcloud\Classes\Lists;
 use Anthony\Sendcloud\Sendcloud\Classes\ReturnItem;
@@ -76,20 +78,8 @@ class Sendcloud extends Module
         );
         $this->repository = new Anthony\Sendcloud\Repository($this);
 
-        /*$lists = new Lists();
-        $lists->setDateFrom("2022-03-01 00:00:00")
-            ->setDateTo("2022-04-30 00:00:00")
-        ;
-
-        $returnItem = new ReturnItem(1);
-        $createReturn = new CreateReturn();
-        $CancelReturn = new CancelReturn(2);
-        //dump($lists->exec(), $returnItem->exec(), $createReturn->simulReturn());
-        dump($createReturn->simulReturn()->validate());
-        die;*/
-
         parent::__construct();
-        
+
         $this->displayName = $this->l('Gestion des retours');
         $this->description = $this->l('Permet au marchand de gérer les retours clients');
 
@@ -111,10 +101,52 @@ class Sendcloud extends Module
     }
 
     public function getContent() {
-        return " <div id='sendcloud-container'>
-        <span class='text-red'>Hello world</span>
-        <p><span class='user-icon'></span> lorem ipsum <span class='poppins-black'>dolor</span></p>
-        </div>";
+        $this->postProcess();
+        $this->assignValues();
+
+        return $this->fetch('module:'.$this->name.'/views/templates/admin/configure.tpl');
+    }
+
+    public function assignValues() {
+        $configs = array_merge(
+            $this->getMollieConfig(),
+            $this->getGlobalConf(),
+        );
+        $data = [];
+        foreach($configs as $conf) {
+            $data[$conf] = Configuration::get($conf);
+        }
+        $this->context->smarty->assign($data);
+    }
+
+    public function getMollieConfig() {
+        return [
+            'SC_API_MOLLIE_LIVE',
+            'SC_API_MOLLIE_TEST',
+            'SC_API_MOLLIE_FEES',
+        ];
+    }
+
+    public function getGlobalConf() {
+        return [
+            'SC_USERNAME',
+            'SC_PASSWORD',
+            'SC_LIVE_MODE',
+        ];
+    }
+
+    public function postProcess() {
+        if(Tools::isSubmit('submitConfigMollie')) {
+            foreach($this->getMollieConfig() as $conf) {
+                Configuration::updateValue($conf, Tools::getValue($conf));
+            }
+        }
+
+        if(Tools::isSubmit('submitConf')) {
+            foreach($this->getGlobalConf() as $conf) {
+                Configuration::updateValue($conf, Tools::getValue($conf));
+            }
+        }
     }
 
     /**
@@ -123,7 +155,7 @@ class Sendcloud extends Module
     public function hookBackOfficeHeader()
     {
         if (Tools::getValue('configure') == $this->name) {
-            $this->context->controller->addJS($this->_path.'public/index.module.js');
+            $this->context->controller->addJS($this->_path.'public/index.js');
             $this->context->controller->addCSS($this->_path.'public/index.css');
             //$this->context->controller->addCSS($this->_path.'views/css/back.css');
         }
@@ -134,8 +166,29 @@ class Sendcloud extends Module
      */
     public function hookHeader()
     {
-        $this->context->controller->addJS($this->_path.'/views/js/front.js');
-        $this->context->controller->addCSS($this->_path.'/views/css/front.css');
+       if(Tools::getValue('controller') == "history") {
+            Media::addJsDef(array(
+                'toreturns' => $this->getReturned()
+            ));
+            $this->context->controller->addJS($this->_path.'public/history.js');
+       }
+
+       /**
+        * 
+        *$this->context->controller->addJS($this->_path.'/views/js/front.js');
+        *$this->context->controller->addCSS($this->_path.'/views/css/front.css');
+        */
+    }
+
+    public function getReturned() {
+        $self = $this;
+        return array_map(function($a)use($self){
+            $link = $self->context->link->getModuleLink($self->name, 'addreturn', ['id_order' => $a['id_order']]);
+            return [
+                'reference' => $a['reference'],
+                'button' => '<a href="'.$link.'"><i class="material-icons">&#xE860;</i>'.$this->l('Retourner').'</a>'
+            ];
+        }, CustomerReturn::getOrdersToReturns($this->context->customer->id));
     }
 
     public function hookDisplayCustomerAccount()

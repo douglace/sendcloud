@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'anthony/sendcloud',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '611d0cb114102bc6382ed15bec87ce68d30c2b30',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'anthony/sendcloud' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '611d0cb114102bc6382ed15bec87ce68d30c2b30',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'composer/ca-bundle' => array(
+            'pretty_version' => '1.3.3',
+            'version' => '1.3.3.0',
+            'reference' => '30897edbfb15e784fe55587b4f73ceefd3c4d98c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/./ca-bundle',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'mollie/mollie-api-php' => array(
+            'pretty_version' => 'v2.45.0',
+            'version' => '2.45.0.0',
+            'reference' => '43ae5471967a47b34752b6b3a229038a05034527',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mollie/mollie-api-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

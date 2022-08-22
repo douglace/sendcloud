@@ -26,11 +26,11 @@
    entry: {
      index: './_dev/module.ts',
      front: './_dev/front.ts',
-     print: './_dev/print.js',
+     history: './_dev/history.ts',
     },
    output: {
      path: path.resolve(__dirname, 'public'),
-     filename: '[name].module.js',
+     filename: '[name].js',
      clean: true
    },
    devtool: 'inline-source-map',

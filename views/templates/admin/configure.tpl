@@ -35,14 +35,52 @@
 		{l s='This module will boost your sales!' mod='sendcloud'}
 	</p>
 </div>
+<div id='sendcloud-container'>
+	<div class="panel">
+		<h3><i class="icon icon-cogs"></i> {l s='Sendcloud' mod='sendcloud'}</h3>
+		<div class=''>
+			<form method="post">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label class="form-label">{l s='Nom d\'utilisateur' mod='sendcloud'}</label>
+						<input name="SC_USERNAME" value="{$SC_USERNAME}" class="form-control" />
+					</div>
+					<div class="col-md-6 form-group">
+						<label class="form-label">{l s='Mot de passe' mod='sendcloud'}</label>
+						<input name="SC_PASSWORD" value="{$SC_PASSWORD}" class="form-control" />
+					</div>
+					<div class="col-md-6 form-group">
+						<label class="form-label">
+							<span>{l s='Live mode' mod='sendcloud'}</span>
+							<input type="checkbox" name="SC_LIVE_MODE" value="1" {if isset($SC_LIVE_MODE) && $SC_LIVE_MODE}checked="checked"{/if} />
+						</label>
+					</div>
+				</div>
+				<button class="btn btn-primary" type="submit" name="submitConf">{l s='Enregistrer' mod='sendcloud'}</button>
+			</form>
+		</div>
+	</div>
 
-<div class="panel">
-	<h3><i class="icon icon-tags"></i> {l s='Documentation' mod='sendcloud'}</h3>
-	<p>
-		&raquo; {l s='You can get a PDF documentation to configure this module' mod='sendcloud'} :
-		<ul>
-			<li><a href="#" target="_blank">{l s='English' mod='sendcloud'}</a></li>
-			<li><a href="#" target="_blank">{l s='French' mod='sendcloud'}</a></li>
-		</ul>
-	</p>
+	<div class="panel">
+		<h3><i class="icon icon-cogs"></i> {l s='Mollie' mod='sendcloud'}</h3>
+		<div class=''>
+			<form method="post">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label class="form-label">{l s='Api live' mod='sendcloud'}</label>
+						<input name="SC_API_MOLLIE_LIVE" value="{$SC_API_MOLLIE_LIVE}" class="form-control" />
+					</div>
+					<div class="col-md-6 form-group">
+						<label class="form-label">{l s='Api test' mod='sendcloud'}</label>
+						<input name="SC_API_MOLLIE_TEST" value="{$SC_API_MOLLIE_TEST}" class="form-control" />
+					</div>
+					<div class="col-md-6 form-group">
+						<label class="form-label">{l s='Frais de retours' mod='sendcloud'}</label>
+						<input name="SC_API_MOLLIE_FEES" value="{$SC_API_MOLLIE_FEES}" class="form-control" />
+					</div>
+				</div>
+				<button class="btn btn-primary" type="submit" name="submitConfigMollie">{l s='Enregistrer' mod='sendcloud'}</button>
+			</form>
+		</div>
+	</div>
 </div>

@@ -30,38 +30,36 @@
     <div class="sc-returns">
         <h1 class="title">{l s="My returns" d='Modules.Sendcloud.Admin'}</h1>
 
-        <div class="return-header">
+        <!--div class="return-header">
             <span class="add-return" title="{l s='Add return' d='Modules.Sendcloud.Admin'}">
                 <span>{l s='Add return' d='Modules.Sendcloud.Admin'}</span>
                 <i class="material-icons">add</i>
             </span>
-        </div>
+        </div-->
 
         <table class="table table-stripped table-hover table-borderd">
             <thead>
                 <tr>
                     <th>{l s='Order reference' d='Modules.Sendcloud.Admin'}</th>
-                    <th>{l s='Return Id' d='Modules.Sendcloud.Admin'}</th>
-                    <th>{l s='Order Amount' d='Modules.Sendcloud.Admin'}</th>
-                    <th>{l s='Date Add' d='Modules.Sendcloud.Admin'}</th>
+                    <th>{l s='Date return' d='Modules.Sendcloud.Admin'}</th>
                     <th>{l s='Action' d='Modules.Sendcloud.Admin'}</th>
                 </tr>
             </thead>
+            <tbody>
             {if isset($returns) && !empty($returns)}
-                <tbody>
+                
                     {foreach from=$returns item=item key=key name=name}
                         <tr>
                             <td>{$item.reference}</td>
-                            <td>{$item.order_return}</td>
-                            <td>{$item.amount}</td>
                             <td>{$item.date_add}</td>
                             <td>
-                               <a class="btn btn-default" href="{$item.link}">{l s='View' d='Modules.Sendcloud.Admin'}</a> 
+                               <a class="btn btn-default" href="{$item.link}">{l s='Detail' d='Modules.Sendcloud.Admin'}</a> 
                             </td>
                         </tr>
                     {/foreach}
-                </tbody>
+                
             {/if}
+            </tbody>
         </table>
     </div>
 {/block}

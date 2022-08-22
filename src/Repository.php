@@ -132,8 +132,18 @@ class Repository
             `id_customer` int(11) NOT NULL,
             `id_order` int(11) NOT NULL,
             `order_return` varchar(60) NOT NULL,
+            `payment_fees_id` varchar(100) NULL,
+            `fees` decimal(10,2) NULL,
+            `buy_fees` TINYINT(1) NULL DEFAULT "0",
             `date_add` DATETIME NULL,
+            `buy_fees_state` INT(10) NULL DEFAULT "0",
             PRIMARY KEY  (`id_sc_returns`)
+        ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+
+        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'sc_returns_detail` (
+            `id_return` int(11) NOT NULL,
+            `id_product` int(11) NOT NULL,
+            PRIMARY KEY  (`id_return`, `id_product`)
         ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
         
         foreach ($sql as $query) {
@@ -152,6 +162,7 @@ class Repository
     {
         $sql = array();
         $sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'sc_returns`';
+        $sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'sc_returns_detail`';
         foreach ($sql as $query) {
             if (Db::getInstance()->execute($query) == false) {
                 return false;

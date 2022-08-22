@@ -25,27 +25,75 @@
 */
 
 use Anthony\Sendcloud\Models\CustomerReturn;
-
 class sendcloudReturnsModuleFrontController extends ModuleFrontController
 {
 
+    public $auth = true;
+    public $returned;
+    public $products;
+    public $returns;
+
     public function init() {
         parent::init();
+
+        $id_customer = $this->context->customer->id;
+        if(Tools::isSubmit('view')) {
+            $this->returned = CustomerReturn::getReturnByIdOrderReturn(Tools::getValue('view'));
+            $order = new Order($this->returned['id_order']);
+            if($order->id_customer != $id_customer) {
+                Tools::redirectLink($this->context->link->getModuleLink($this->module->name, 'returns'));
+            }
+            $this->products = CustomerReturn::getReturnedProducts(Tools::getValue('view'));
+
+        } else {
+            $this->returns = CustomerReturn::getReturns($id_customer);
+            $this->setTemplate('module:sendcloud/views/templates/front/returns.tpl');
+        }
     }
 
     public function setMedia()
     {
         parent::setMedia();
-        $this->addJS($this->module->getPathUri().'public/front.module.js');
+        $this->addJS($this->module->getPathUri().'public/front.js');
         $this->addCSS($this->module->getPathUri().'public/front.css');
     }
 
     public function initContent()
     {
         parent::initContent();
-        $this->context->smarty->assign([
-            'returns' => CustomerReturn::getReturns($this->context->customer->id)
-        ]);
-        $this->setTemplate('module:sendcloud/views/templates/front/returns.tpl');
+        
+        if(Tools::isSubmit('view')) {
+            $this->context->smarty->assign([
+                'return' => $this->returned,
+                'products' => $this->products,
+            ]);
+    
+            $this->setTemplate('module:sendcloud/views/templates/front/return.tpl');
+        } else {
+            $this->context->smarty->assign([
+                'returns' => $this->returns
+            ]);
+    
+            $this->setTemplate('module:sendcloud/views/templates/front/returns.tpl');
+        }
+    }
+
+    public function getBreadcrumbLinks()
+    {
+        $breadcrumb = parent::getBreadcrumbLinks();
+        
+        $breadcrumb['links'][] = [
+            'title' => $this->trans('Mes retours', [], 'Module.Sendcloud.Return'),
+            'url' => $this->context->link->getModuleLink($this->module->name, 'returns'),
+        ];
+
+        if(Tools::isSubmit('view')) {
+            $breadcrumb['links'][] = [
+                'title' => $this->returned['reference'],
+                'url' => "#",
+            ];
+        }
+
+        return $breadcrumb;
     }
 }

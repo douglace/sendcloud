@@ -11,5 +11,7 @@
             "email": "kvdouglace@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "mollie/mollie-api-php": "^2.0"
+    }
 }

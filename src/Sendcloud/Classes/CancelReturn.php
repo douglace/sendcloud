@@ -16,6 +16,7 @@ class CancelReturn extends SqQuery {
     public function __construct($id)
     {
         $this->id = $id;
+        parent::__construct();
     }
 
     public function exec()

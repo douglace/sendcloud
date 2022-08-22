@@ -7,6 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit79fd1149880f6cad9be82968f13c18a7
 {
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'Mollie\\Api\\' => 11,
+        ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
+        ),
         'A' => 
         array (
             'Anthony\\Sendcloud\\' => 18,
@@ -14,6 +22,14 @@ class ComposerStaticInit79fd1149880f6cad9be82968f13c18a7
     );
 
     public static $prefixDirsPsr4 = array (
+        'Mollie\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mollie/mollie-api-php/src',
+        ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
         'Anthony\\Sendcloud\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

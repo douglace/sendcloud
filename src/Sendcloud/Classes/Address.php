@@ -4,6 +4,10 @@ namespace Anthony\Sendcloud\Sendcloud\Classes;
 
 use Anthony\Sendcloud\Sendcloud\Interfaces\DataInterface;
 
+use Address as PrestashopAddress;
+use Configuration;
+use Country;
+
 class Address implements DataInterface {
     /**
      * @var string
@@ -222,17 +226,82 @@ class Address implements DataInterface {
     // GET FOR QUERY
 
     public function getData() {
-        return [
+        $data = [
             "name" => $this->getName(),
-            "company_name" => $this->getCompanyName(),
             "address_1" => $this->getAddress1(),
-            "address_2" => $this->getAddress2(),
-            "house_number" => $this->getHouseNumber(),
             "postal_code" => $this->getPostalCode(),
             "city" => $this->getCity(),
             "country" => $this->getCountry(),
-            "telephone" => $this->getTelephone(),
-            "email" => $this->getEmail()
         ];
+
+        if(!empty($this->getCompanyName())) {
+            $data['company_name'] = $this->getCompanyName();
+        }
+
+        if(!empty($this->getCompanyName())) {
+            $data['address_2'] = $this->getAddress2();
+        }
+
+        if(!empty($this->getCompanyName())) {
+            $data['house_number'] = $this->getHouseNumber();
+        }
+
+        if(!empty($this->getCompanyName())) {
+            $data['telephone'] = $this->getTelephone();
+        }
+
+        if(!empty($this->getCompanyName())) {
+            $data['email'] = $this->getEmail();
+        }
+
+        return $data;
+    }
+    /**
+     * @param PrestashopAddress $addr
+     * @param string $email
+     * @param string $country_code
+     * @return Address
+     */
+    public static function createFromPrestashopAddress($addr, $email = "", $country_code = '') {
+        $address = new Address();
+        if(empty($country_code)){
+            $country = new Country($addr->id_country);
+            $country_code = $country->iso_code;
+        }
+
+        $address->setAddress1($addr->address1)
+            ->setAddress2($addr->address2)
+            ->setName($addr->lastname)
+            ->setCompanyName($addr->company)
+            ->setHouseNumber($addr->phone)
+            ->setCity($addr->city)
+            ->setPostalCode($addr->postcode)
+            ->setCountry($country_code)
+            ->setTelephone($addr->phone_mobile)
+            ->setEmail($email)
+        ;
+
+        return $address;
+    }
+
+    public static function createAdminPrestashopAddress() {
+        $address = new Address();
+        $name = Configuration::get('PS_SHOP_NAME');
+        $email = Configuration::get('PS_SHOP_EMAIL');
+        $country = new Country(Configuration::get('PS_COUNTRY_DEFAULT'));
+
+        $address->setName($name)
+            ->setCompanyName($name)
+            ->setAddress1($name)
+            ->setEmail($email)
+            ->setPostalCode("64990")
+            ->setCity("Toulouse")
+            ->setTelephone('+319881729999')
+            ->setCountry($country->iso_code)
+            ->setHouseNumber("67778873")
+            ->setAddress2($name)
+        ;
+
+        return $address;
     }
 }
